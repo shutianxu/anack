@@ -23,9 +23,9 @@ def get_close_price(id, day = 0):
     if day == 0:
         day = datetime.datetime.now() - datetime.timedelta(days=1)
         day = day.strftime("%Y%m%d")
-    if id[:3] == '000' or id[:3] == '002' or id[:3] == '300': #如果非主板，则前缀为1
+    if id[:3] == '000' or id[:3] == '002' or id[:3] == '300': #如果是深市，则前缀为1
         nid = '1' + id
-    else: #如果是主板，则前缀为0
+    else: #如果是沪市主板，则前缀为0
         nid = '0' + id
     url = "http://quotes.money.163.com/service/chddata.html?code=%s&start=%s&end=%s&\
     fields=TCLOSE" %(nid, day,day)
@@ -89,16 +89,16 @@ def get_period_price(id, start_day, stop_day = 0):
     return df
 
 if __name__ == '__main__':
-    id = '300124'
+    id = '601012'
     start_day = '20170625'
     stop_day = '20180625'
     
     #获取昨天的收盘价
-    price = get_close_price(id) 
-    print(price)
+#    price = get_close_price(id) 
+#    print(price)
     
 #    #获取指定一天的收盘价
-#    price = get_close_price('600660','20171009') 
+#    price = get_close_price('600660','20170209') 
 #    print(price)
 #    
 #    #获取从start_day开始直到昨天的收盘价
